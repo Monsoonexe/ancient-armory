@@ -35,7 +35,7 @@ namespace AncientArmory
             Armory = GameObject.FindGameObjectWithTag("ArmoryController");
             Battlefield = GameObject.FindGameObjectWithTag("BattlefieldController");
             Tavern = GameObject.FindGameObjectWithTag("TavernController");
-            GameDatabase = GameObject.FindGameObjectWithTag("GameDatabase").GetComponent<GameDatabase>();
+            GameDatabase = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameDatabase>();
         }
 
         /// <summary>
