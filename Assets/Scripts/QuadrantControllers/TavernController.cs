@@ -14,7 +14,22 @@ namespace AncientArmory
         [Header("---TavernController---")]
         public int MercsSpawned;
         public GameObject MercPrefab;
-        List<GameObject> DeadPool;
+
+        /// <summary>
+        /// Point where a Merc gets added to the world.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Point where a Merc gets added to the world.")]
+        private Transform mercSpawnPoint;
+
+        /// <summary>
+        /// DeadPool. 
+        /// </summary>
+        private readonly List<GameObject> DeadPool = new List<GameObject>();
+
+        //private member Component references
+
+        //private external references
         GameObject Armory;
         GameObject Tavern;
         GameObject Battlefield;
@@ -23,16 +38,26 @@ namespace AncientArmory
         GameObject newMerc;
         Roll Roll;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            AddStaticReferences();
+
+        }
+
         protected override void Start()
         {
             base.Start();
-            AddStaticReferences();
             cooldownDelay = 10;
             cooldownMessage = "cooldownMessage";
-            StartTimerCycle();
+            StartTimerCycle();//let it begin
         }
-
-        void AddStaticReferences()
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>Nothing happening in here is static.</remarks>
+        private void AddStaticReferences()
         {
             Roll = new Roll();
             Armory = GameObject.FindGameObjectWithTag("ArmoryController");
@@ -40,7 +65,7 @@ namespace AncientArmory
             Tavern = GameObject.FindGameObjectWithTag("TavernController");
             GameDatabase = GameObject.FindGameObjectWithTag("GameDatabase").GetComponent<GameDatabase>();
         }
-
+        
         //
         // Timer Cycle Functions
         //
@@ -84,18 +109,22 @@ namespace AncientArmory
 
         void SendToArmory()
         {
-            // TODO: Add delay + walking over animation
-            armoryControllerInstance.Scavengers.Add(newMerc);
-            newMerc.transform.parent = Battlefield.transform;
+            var mercController = newMerc.GetComponent<MercController>();//cache this to avoid excessive reflection
+            mercController.SetDestination(armoryControllerInstance.transform.position);//set target destination
+
+            armoryControllerInstance.Scavengers.Add(newMerc);//alert Controller of new charge
+            newMerc.transform.parent = armoryControllerInstance.transform;//set Controller as parent
         }
 
         void SendToBattlefield()
         {
-            // TODO: Add delay + walking over animation
-            battlefieldControllerInstance.WaitingLine.Add(newMerc);
-            newMerc.transform.parent = Battlefield.transform;
-        }
+            var mercController = newMerc.GetComponent<MercController>();//cache this to avoid excessive reflection
+            mercController.SetDestination(armoryControllerInstance.transform.position);//set target destination
 
+            battlefieldControllerInstance.WaitingLine.Add(newMerc);//alert Controller of new charge
+            newMerc.transform.parent = battlefieldControllerInstance.transform;//set Controller as parent
+        }
+        
         //
         // Merc Spawn Funtions
         //
@@ -108,14 +137,17 @@ namespace AncientArmory
             }
             else // if pool has mercs
             {
+                //2nd merc pull will still be first merc.  
                 newMercFromPool();
             }
+
+            newMerc.transform.position = mercSpawnPoint.position;//set starting point
         }
 
         void newMercInstance()
         {
             // Create a new instance of MercPrefab
-            newMerc = Instantiate(MercPrefab, Tavern.transform); // TODO: get exact start location
+            newMerc = Instantiate(MercPrefab);
             // Create new character mono & attach it to newMerc
             Character mercCharacter = GameDatabase.Classes.CreateCharacter(newMerc, "Soldier", 1, GameDatabase.Extensions);
             newMerc.AddComponent<MercController>();
@@ -128,8 +160,6 @@ namespace AncientArmory
             newMerc = DeadPool[0];
             // Make the invisible dead visible
             newMerc.SetActive(true);
-            // Move to Tavern position.
-            newMerc.transform.parent = Tavern.transform; // TODO: get exact start location
             // Get existing Character component
             Character mercCharacter = newMerc.GetComponent<Character>();
             InitializeMerc(mercCharacter);
@@ -141,7 +171,7 @@ namespace AncientArmory
             mercCharacter.Level = ++MercsSpawned;
             assignStats(mercCharacter);
             assignCost(mercCharacter);
-            controller.SetHealth();
+            controller.InitHealth();
         }
 
         void assignCost(Character merc)
