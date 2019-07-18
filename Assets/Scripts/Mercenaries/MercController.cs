@@ -56,6 +56,15 @@ namespace AncientArmory
             //healthController.UpdateHealth(currentHealth, maxHealth);//wasteful in update -- only when needed
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                Debug.Log("An enemy is within my reach!");
+                //alert ai of state
+            }
+        }
+
         /// <summary>
         /// Initialize references to classes.
         /// </summary>
