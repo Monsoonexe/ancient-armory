@@ -119,7 +119,7 @@ namespace AncientArmory
         void SendToBattlefield()
         {
             var mercController = newMerc.GetComponent<MercController>();//cache this to avoid excessive reflection
-            mercController.SetDestination(armoryControllerInstance.transform.position);//set target destination
+            mercController.SetDestination(battlefieldControllerInstance.transform.position);//set target destination
 
             battlefieldControllerInstance.WaitingLine.Add(newMerc);//alert Controller of new charge
             newMerc.transform.parent = battlefieldControllerInstance.transform;//set Controller as parent
