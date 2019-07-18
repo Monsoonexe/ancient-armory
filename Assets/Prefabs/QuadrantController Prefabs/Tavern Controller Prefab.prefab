@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2294510488343768045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1501085150679727789}
+  m_Layer: 0
+  m_Name: Merc Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1501085150679727789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2294510488343768045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.39, y: 0, z: 1.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3598207322743657987}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2526136053282073417
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +305,7 @@ Transform:
   - {fileID: 6082955457994315949}
   - {fileID: 2526136053282073416}
   - {fileID: 2526136053598115205}
+  - {fileID: 1501085150679727789}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -300,7 +331,8 @@ MonoBehaviour:
   leftButtonText: Assign to Battlefield
   rightButtonText: Assign to Armory
   MercsSpawned: 0
-  MercPrefab: {fileID: 0}
+  MercPrefab: {fileID: 1403660842192184, guid: a6243ef2f6e6341eda1bea872c935617, type: 3}
+  mercSpawnPoint: {fileID: 1501085150679727789}
 --- !u!1001 &329966548571794325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -540,6 +572,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2526136053511856738}
     m_Modifications:
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_Name
+      value: Ready Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7485686479054058766, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -645,15 +687,15 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
-      propertyPath: m_Name
-      value: Ready Icon
+      propertyPath: m_SizeDelta.x
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 7396069113695894269, guid: f2931e93f493d6746b885d966a8a5922,
+    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_SizeDelta.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2433494548858761382, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}
@@ -664,16 +706,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnReadyIconPressed
-      objectReference: {fileID: 0}
-    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 329196246999514275, guid: f2931e93f493d6746b885d966a8a5922,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8167549099896039553, guid: f2931e93f493d6746b885d966a8a5922,
         type: 3}

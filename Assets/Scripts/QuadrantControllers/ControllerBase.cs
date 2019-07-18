@@ -62,9 +62,14 @@ namespace AncientArmory
         [SerializeField]
         protected string rightButtonText = "Do the right thing.";
 
+        //private member Component references
+        protected Transform myTransform;
+
         protected virtual void Awake()
         {
             GatherStaticReferences();
+
+            myTransform = transform;//cache to reduce excess garbage generation
         }
 
         /// <summary>

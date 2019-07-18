@@ -20,6 +20,11 @@ namespace AncientArmory
         [SerializeField]
         private HealthColors healthColors;
         
+        /// <summary>
+        /// Match visuals to given values. Should be called any time health has changed.
+        /// </summary>
+        /// <param name="currentHealth"></param>
+        /// <param name="maxHealth"></param>
         public void UpdateHealth(int currentHealth, int maxHealth)
         {
             var healthPercent = (float)currentHealth / (float)maxHealth;
