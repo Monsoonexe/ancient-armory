@@ -49,3 +49,5 @@ MonoBehaviour:
   Upgrades: {fileID: 0}
   Classes: {fileID: 0}
   Extensions: {fileID: 0}
+  spriteDatabase: []
+  soundDatabase: []
